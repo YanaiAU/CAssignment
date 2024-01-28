@@ -8,6 +8,8 @@ int countDigits(int);
 
 int isArmstrongRecursive(int, int);
 
+int recursiveReverseNum(int, int);
+
 int isArmstrong(int number) {
     int digits = countDigits(number);
     return (isArmstrongRecursive(number ,digits) == number);
@@ -29,17 +31,18 @@ int countDigits(int number) {
     return digits;
 }
 
-int isPalindrome(int number){
-    int x = number;
-    int counter = 0;
-    if (number < 10) { return 1;}
-    while ( x >= 10 ) { x /= 10, counter++; }
-    int y = number % 10;
-    if ( x != y ) { return 0;}
-    if ( counter  == 2 ) { return 1; }
-    number = number - (x * recursivePower(10, counter) );
-    number = number - y;
-    return isPalindrome(number);
+int isPalindrome(int num){
+    int reversed = 0;
+    reversed = recursiveReverseNum(num, 0);
+    if(num == reversed) { return 1;}
+    return 0;
+}
+
+int recursiveReverseNum(int num, int reversed) {
+    if(num == 0) { return reversed;}
+    int remainder = num % 10;
+    reversed = reversed * 10 + remainder;
+    return recursiveReverseNum(num/10, reversed);
 }
 
 int recursivePower(int number, int nPower) {

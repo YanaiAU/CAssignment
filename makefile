@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -fPIC
 
 all: mains maindloop maindrec loops recursives
 
@@ -41,10 +41,10 @@ basicClassification.o: basicClassification.c
 	${CC} ${CFLAGS} -c basicClassification.c
 
 advancedClassificationLoop.o: advancedClassificationLoop.c
-	${CC} ${CFLAGS} -fPIC -c basicClassification.c advancedClassificationLoop.c
+	${CC} ${CFLAGS} -c basicClassification.c advancedClassificationLoop.c
 
 advancedClassificationRecursion.o: advancedClassificationRecursion.c
-	${CC} ${CFLAGS} -fPIC -c basicClassification.c advancedClassificationRecursion.c
+	${CC} ${CFLAGS} -c basicClassification.c advancedClassificationRecursion.c
 
 clean:
 	rm *.so *.a *.o mains maindloop maindrec

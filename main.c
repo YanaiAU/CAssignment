@@ -3,8 +3,7 @@
 
 int main() {
     int num1, num2, smaller, bigger;
-    scanf("%d" " %d", &num1, &num2);
-
+    scanf("%d %d", &num1, &num2);
     if (num1 < num2) {
         smaller = num1;
         bigger = num2;
@@ -31,6 +30,7 @@ int main() {
     for (int i = smaller; i <= bigger; i++) {
         if (isStrong(i)) { printf(" %d", i); }
     }
+    printf("\n");
 
     return 0;
 }

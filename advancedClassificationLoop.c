@@ -1,7 +1,7 @@
 //
 // Created by yanai on 1/24/24.
 //
-
+/*
 int recursivePower(int, int);
 
 int isArmstrong(int number) {
@@ -40,3 +40,4 @@ int isPalindrome(int number){
     }
     return(ogNum == reversedNum);
 }
+*/

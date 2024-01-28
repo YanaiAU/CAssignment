@@ -38,7 +38,7 @@ int isPalindrome(int number){
     if ( x != y ) { return 0;}
     if ( counter  == 2 ) { return 1; }
     number = number - (x * recursivePower(10, counter) );
-    number %= 10;
+    number = number - y;
     return isPalindrome(number);
 }
 

@@ -2,13 +2,8 @@
 #include "NumClass.h"
 
 int main() {
-    printf("Hello, World!\n");
-
     int num1, num2, smaller, bigger;
-
-    printf("Please enter first number: ");
     scanf("%d", &num1);
-    printf("Please enter second number: ");
     scanf("%d", &num2);
 
     if (num1 < num2) {

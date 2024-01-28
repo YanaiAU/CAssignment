@@ -1,51 +1,47 @@
-CC = gcc
-CFLAGS = -Wall -fPIC -c
+all: mains maindloop maindrec loops recursives 
 
-LOOPOBJECTS = basicClassification.o advancedClassificationLoop.o
-RECURSIVEOBJECTS = basicClassification.o advancedClassificationRecursion.o
+loops: libclassloops.a
 
-all : mains maindloop maindrec loops recursives loopd recursived
-
-main.o: main.c
-	${CC} ${CFLAGS} main.c
-
-mains: main.o libclassrec.a
-	${CC} -Wall -o mains main.o libclassrec.a
-
-maindrec: main.o libclassrec.so
-	${CC} -Wall main.o libclassrec.so -o ./maindrec
-
-maindloop: main.o libclassloops.so
-	${CC} -Wall main.o libclassloops.so -o ./maindloop
-
-loops : libclassloops.a
 recursives: libclassrec.a
-loopd: libclassloops.so
+
 recursived: libclassrec.so
 
-libclassloops.a : ${LOOPOBJECTS}
+loopd: libclassloops.so
+
+mains: main.o recursives
+	gcc -Wall -o mains main.o libclassrec.a
+
+maindloop: main.o libclassloops.so
+	gcc -Wall main.o ./libclassloops.so -o maindloop
+
+maindrec: main.o libclassrec.so
+	gcc -Wall main.o ./libclassrec.so -o maindrec
+
+libclassloops.a:basicClassification.o advancedClassificationLoop.o
 	ar rcs libclassloops.a basicClassification.o advancedClassificationLoop.o
 	ranlib libclassloops.a
 
-
-libclassrec.a : ${RECURSIVEOBJECTS}
+libclassrec.a: basicClassification.o advancedClassificationRecursion.o
 	ar rcs libclassrec.a basicClassification.o advancedClassificationRecursion.o
 	ranlib libclassrec.a
 
-libclassloops.so: ${LOOPOBJECTS}
-	${CC} -Wall ${LOOPOBJECTS} -shared -o libclassloops.so
+libclassloops.so: basicClassification.c advancedClassificationLoop.c basicClassification.o advancedClassificationLoop.o
+	gcc -Wall basicClassification.o advancedClassificationLoop.o -shared -o libclassloops.so
 
-libclassrec.so: ${RECURSIVEOBJECTS}
-	${CC} -Wall  ${RECURSIVEOBJECTS} -shared -o libclassrec.so
+libclassrec.so: basicClassification.c advancedClassificationRecursion.c basicClassification.o advancedClassificationRecursion.o	
+	gcc -Wall  basicClassification.o advancedClassificationRecursion.o -shared -o libclassrec.so
 
-basicClassification.o : basicClassification.c
-	${CC} ${CFLAGS} basicClassification.c
+main.o: main.c
+	gcc -Wall -c main.c
 
-advancedClassificationLoop.o : advancedClassificationLoop.c
-	${CC} ${CFLAGS} advancedClassificationLoop.c
+basicClassification.o: basicClassification.c
+	gcc -Wall -c basicClassification.c
 
-advancedClassificationRecursion.o : advancedClassificationRecursion.c
-	${CC} ${CFLAGS} advancedClassificationRecursion.c
+advancedClassificationLoop.o: advancedClassificationLoop.c 
+	gcc -Wall -fPIC -c basicClassification.c advancedClassificationLoop.c
+
+advancedClassificationRecursion.o: advancedClassificationRecursion.c 
+	gcc -Wall -fPIC -c basicClassification.c advancedClassificationRecursion.c
 
 clean:
-	rm -f *.so *.a *.o mains maindloop maindrec
+	rm *.so *.a *.o mains maindloop maindrec

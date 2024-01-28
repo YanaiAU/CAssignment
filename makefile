@@ -32,7 +32,7 @@ libclassrec.so: basicClassification.c advancedClassificationRecursion.c basicCla
 	gcc -Wall  basicClassification.o advancedClassificationRecursion.o -shared -o libclassrec.so
 
 main.o: main.c
-	{CC} -Wall -c main.c
+	gcc -Wall -c main.c
 
 basicClassification.o: basicClassification.c
 	gcc -Wall -c basicClassification.c

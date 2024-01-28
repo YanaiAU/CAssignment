@@ -1,7 +1,7 @@
 //
 // Created by yanai on 1/24/24.
 //
-/*
+
 int recursivePower(int, int);
 
 int countDigits(int);
@@ -56,4 +56,3 @@ int recursivePower(int number, int nPower) {
     else
         return number * recursivePower(number, nPower - 1);
 }
-*/
